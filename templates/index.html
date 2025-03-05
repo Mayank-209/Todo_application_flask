@@ -9,7 +9,7 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/">MyTodo</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -44,20 +44,18 @@
       </div>
     </nav>
     <div class="container my-3">
-      <form>
+      <h2>Add a TODO</h2>
+      <form action="/" method="POST">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <label for="title" class="form-label">Task Name</label>
+          <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">Enter the name of the Task here.</div>
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
+          <label for="desc" class="form-label">Task Description</label>
+          <input type="text" class="form-control" name="desc" id="desc">
         </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
+        
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
@@ -65,10 +63,11 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">SNo</th>
             <th scope="col">First</th>
             <th scope="col">Last</th>
             <th scope="col">Handle</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -78,6 +77,9 @@
             <td>{{todo.title}}</td>
             <td>{{todo.desc}}</td>
             <td>{{todo.date_created}}</td>
+            <td><a href="/delete/{{todo.sno}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Delete</a>
+              <a href="/update/{{todo.sno}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Update</a></td>
+            
           </tr>
           {% endfor %}
           
