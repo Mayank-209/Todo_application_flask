@@ -34,13 +34,23 @@ def hello_world():
 @app.route('/show')
 def products():
      allTodo=Todo.query.all()
-     print(allTodo)
+     
      return 'this is product page'
-@app.route('/update')
-def update():
-     allTodo=Todo.query.all()
-     print(allTodo)
-     return 'this is product page'
+@app.route('/update/<int:sno>',methods=['GET','POST'])
+def update(sno):
+     if request.method=='POST':
+          title=request.form['title']
+          desc=request.form['desc']
+          todo= Todo.query.filter_by(sno=sno).first()
+          todo.title=title
+          todo.desc=desc
+          db.session.add(todo)
+          db.session.commit()
+          return redirect("/")
+          
+     allTodo=Todo.query.filter_by(sno=sno).first()
+     print("hello",allTodo)
+     return render_template('update.html',todo=allTodo)
 
 @app.route('/delete/<int:sno>')
 def delete(sno):
